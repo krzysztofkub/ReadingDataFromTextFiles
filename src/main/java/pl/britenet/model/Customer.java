@@ -1,6 +1,5 @@
 package pl.britenet.model;
 
-import java.util.List;
 
 public class Customer {
 
@@ -10,12 +9,12 @@ public class Customer {
 
     private String surname;
 
-    private int age;
+    private String age;
 
     public Customer() {
     }
 
-    public Customer(int id, String name, String surname, int age) {
+    public Customer(int id, String name, String surname, String age) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -46,11 +45,11 @@ public class Customer {
         this.surname = surname;
     }
 
-    public int getAge() {
+    public String getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(String age) {
         this.age = age;
     }
 
