@@ -1,23 +1,30 @@
 package pl.britenet.main;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import pl.britenet.service.CsvService;
+import pl.britenet.service.XmlService;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Main {
-    public static final String DATA = "src/main/resources/dane-osoby.txt";
+
+    private static final String DATA = "src/main/resources/dane-osoby.txt";
 
     public static void main(String[] args) {
-        try (BufferedReader br = new BufferedReader(new FileReader(DATA))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                String[] dataArr = line.split(",");
-
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (checkIfXml()) {
+            XmlService xmlService = new XmlService();
+//            xmlService.saveToDb(DATA);
+        } else {
+            CsvService csvService = new CsvService();
+            csvService.saveToDb(DATA);
         }
     }
+
+    private static boolean checkIfXml() {
+        String patternString = ".+\\.xml$";
+        Pattern pattern = Pattern.compile(patternString);
+        Matcher matcher = pattern.matcher(DATA);
+        return matcher.matches();
+    }
 }
+

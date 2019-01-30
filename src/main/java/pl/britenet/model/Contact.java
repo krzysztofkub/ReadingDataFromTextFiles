@@ -1,16 +1,16 @@
 package pl.britenet.model;
 
-public class Contacts {
+public class Contact {
 
     private int id;
     private int type;
     private String contact;
     private Customer customer;
 
-    public Contacts() {
+    public Contact() {
     }
 
-    public Contacts(int id, int type, String contact, Customer customer) {
+    public Contact(int id, int type, String contact, Customer customer) {
         this.id = id;
         this.type = type;
         this.contact = contact;
