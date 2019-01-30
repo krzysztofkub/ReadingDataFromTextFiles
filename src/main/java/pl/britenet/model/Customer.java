@@ -4,19 +4,27 @@ import java.util.List;
 
 public class Customer {
 
+    private int id;
     private String name;
     private String surname;
     private int age;
-    private List<Contact> contact;
 
     public Customer() {
     }
 
-    public Customer(String name, String surname, int age, List<Contact> contact) {
+    public Customer(int id, String name, String surname, int age) {
+        this.id = id;
         this.name = name;
         this.surname = surname;
         this.age = age;
-        this.contact = contact;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -41,13 +49,5 @@ public class Customer {
 
     public void setAge(int age) {
         this.age = age;
-    }
-
-    public List<Contact> getContact() {
-        return contact;
-    }
-
-    public void setContact(List<Contact> contact) {
-        this.contact = contact;
     }
 }
