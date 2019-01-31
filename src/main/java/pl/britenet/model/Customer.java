@@ -1,5 +1,6 @@
 package pl.britenet.model;
 
+import java.util.List;
 
 public class Customer {
 
@@ -11,14 +12,16 @@ public class Customer {
 
     private String age;
 
+    private List<Contact> contacts;
+
     public Customer() {
     }
 
-    public Customer(int id, String name, String surname, String age) {
-        this.id = id;
+    public Customer(String name, String surname, String age, List<Contact> contacts) {
         this.name = name;
         this.surname = surname;
         this.age = age;
+        this.contacts = contacts;
     }
 
     public int getId() {
@@ -53,8 +56,11 @@ public class Customer {
         this.age = age;
     }
 
-    @Override
-    public String toString() {
-        return "Customer{" + "id=" + id + ", name='" + name + '\'' + ", surname='" + surname + '\'' + ", age=" + age + '}';
+    public List<Contact> getContacts() {
+        return contacts;
+    }
+
+    public void setContacts(List<Contact> contacts) {
+        this.contacts = contacts;
     }
 }

@@ -28,7 +28,6 @@ public class CsvService {
                     } catch (NumberFormatException e) {
                         e.printStackTrace();
                     }
-                } else {
                 }
                 CustomerDao customerDao = new CustomerDao();
                 customerDao.create(customer);
@@ -41,6 +40,7 @@ public class CsvService {
                     contact.setContact(lineArr[i]);
                     contactDao.create(contact);
                 }
+
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -63,7 +63,7 @@ public class CsvService {
             return 2;
         }
         //check if jabber - NEED CHANGES
-//        String jabberStringPattern = "^([^@/<>'\\\"]+)$";
+        //        String jabberStringPattern = "^([^@/<>'\\\"]+)$";
         String jabberStringPattern = "^([A-Za-z]+)$";
         pattern = Pattern.compile(jabberStringPattern);
         matcher = pattern.matcher(contact);

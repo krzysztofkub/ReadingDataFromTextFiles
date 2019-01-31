@@ -10,11 +10,9 @@ public class Contact {
     public Contact() {
     }
 
-    public Contact(int id, int type, String contact, Customer customer) {
-        this.id = id;
+    public Contact(int type, String contact) {
         this.type = type;
         this.contact = contact;
-        this.customer = customer;
     }
 
     public int getId() {
