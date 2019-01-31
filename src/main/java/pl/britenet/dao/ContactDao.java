@@ -5,7 +5,7 @@ import pl.britenet.model.Contact;
 
 import java.sql.*;
 
-public class ContactsDao {
+public class ContactDao {
 
     private static final String CREATE_CUSTOMER = "INSERT INTO contacts(id_customer,type,contact) VALUES (?,?,?)";
 
