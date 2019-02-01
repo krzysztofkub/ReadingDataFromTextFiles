@@ -52,7 +52,7 @@ public class CsvParser {
     /**
      * Jabber regex needs improving.
      * @param contact
-     * @return
+     * @return type of contact [0 - unknown, 1 - email, 2 - phone, 3- jabber]
      */
     private int checkType(String contact) {
         //check if email

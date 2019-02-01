@@ -103,7 +103,7 @@ public class XmlParser {
                         break;
                 }
             }
-        } catch (XMLStreamException | FileNotFoundException e) {
+        } catch (XMLStreamException | FileNotFoundException | NullPointerException e) {
             e.printStackTrace();
         }
     }

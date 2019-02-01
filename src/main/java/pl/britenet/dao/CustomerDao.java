@@ -20,7 +20,7 @@ public class CustomerDao {
     /**
      * Saves customer to db
      * @param customer
-     * @return
+     * @return customer with filled id
      */
     public Customer create(Customer customer) {
         try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/britenet" + "?useSSL=false&characterEncoding=utf8", "root", "coderslab")) {

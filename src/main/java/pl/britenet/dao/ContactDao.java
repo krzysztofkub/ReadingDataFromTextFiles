@@ -17,9 +17,8 @@ public class ContactDao {
     /**
      * Saves contact to db
      * @param contact
-     * @return
      */
-    public Contact create(Contact contact) {
+    public void create(Contact contact) {
         try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/britenet" + "?useSSL=false&characterEncoding=utf8", "root", "coderslab")) {
             PreparedStatement insertStm = conn.prepareStatement(CREATE_CUSTOMER);
             insertStm.setInt(1, contact.getCustomer().getId());
@@ -30,7 +29,5 @@ public class ContactDao {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
     }
-
 }

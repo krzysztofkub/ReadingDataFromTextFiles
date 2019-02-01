@@ -24,7 +24,7 @@ public class Main {
 
     /**
      * Check if the file is XML format. If not then it's CSV.
-     * @return
+     * @return true if file is XML
      */
     private static boolean checkIfXml() {
         String patternString = ".+\\.xml$";
