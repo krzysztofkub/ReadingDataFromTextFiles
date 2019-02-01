@@ -12,7 +12,6 @@ public class Customer {
 
     private String age;
 
-    private List<Contact> contacts;
 
     public Customer() {
     }
@@ -21,7 +20,6 @@ public class Customer {
         this.name = name;
         this.surname = surname;
         this.age = age;
-        this.contacts = contacts;
     }
 
     public int getId() {
@@ -54,13 +52,5 @@ public class Customer {
 
     public void setAge(String age) {
         this.age = age;
-    }
-
-    public List<Contact> getContacts() {
-        return contacts;
-    }
-
-    public void setContacts(List<Contact> contacts) {
-        this.contacts = contacts;
     }
 }

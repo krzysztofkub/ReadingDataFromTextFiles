@@ -13,7 +13,7 @@ public class Main {
     public static void main(String[] args) {
         if (checkIfXml()) {
             XmlService xmlService = new XmlService();
-//            xmlService.saveToDb(DATA);
+            xmlService.saveToDb(DATA);
         } else {
             CsvService csvService = new CsvService();
             csvService.saveToDb(DATA);
