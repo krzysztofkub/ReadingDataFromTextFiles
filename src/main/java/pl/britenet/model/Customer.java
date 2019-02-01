@@ -1,7 +1,5 @@
 package pl.britenet.model;
 
-import java.util.List;
-
 public class Customer {
 
     private int id;
@@ -11,16 +9,6 @@ public class Customer {
     private String surname;
 
     private String age;
-
-
-    public Customer() {
-    }
-
-    public Customer(String name, String surname, String age, List<Contact> contacts) {
-        this.name = name;
-        this.surname = surname;
-        this.age = age;
-    }
 
     public int getId() {
         return id;

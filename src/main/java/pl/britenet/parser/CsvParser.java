@@ -1,4 +1,4 @@
-package pl.britenet.service;
+package pl.britenet.parser;
 
 import pl.britenet.dao.ContactDao;
 import pl.britenet.dao.CustomerDao;
@@ -11,7 +11,10 @@ import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class CsvService {
+/**
+ * Parses CSV file into POJOs and saves to db
+ */
+public class CsvParser {
 
     public void saveToDb(String data) {
         try (BufferedReader br = new BufferedReader(new FileReader(data))) {
@@ -40,13 +43,17 @@ public class CsvService {
                     contact.setContact(lineArr[i]);
                     contactDao.create(contact);
                 }
-
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * Jabber regex needs improving.
+     * @param contact
+     * @return
+     */
     private int checkType(String contact) {
         //check if email
         String emailStringPattern = "^\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,3}$";
@@ -62,8 +69,7 @@ public class CsvService {
         if (matcher.matches()) {
             return 2;
         }
-        //check if jabber - NEED CHANGES
-        //        String jabberStringPattern = "^([^@/<>'\\\"]+)$";
+        //check if jabber
         String jabberStringPattern = "^([A-Za-z]+)$";
         pattern = Pattern.compile(jabberStringPattern);
         matcher = pattern.matcher(contact);

@@ -3,16 +3,18 @@ package pl.britenet.model;
 public class Contact {
 
     private int id;
+
     private int type;
+
     private String contact;
+
     private Customer customer;
 
     public Contact() {
     }
 
-    public Contact(int type, String contact) {
+    public Contact(int type) {
         this.type = type;
-        this.contact = contact;
     }
 
     public int getId() {

@@ -1,4 +1,4 @@
-package pl.britenet.service;
+package pl.britenet.parser;
 
 import pl.britenet.dao.ContactDao;
 import pl.britenet.dao.CustomerDao;
@@ -9,14 +9,16 @@ import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class XmlService {
+/**
+ * Parses XML file into POJOs and saves to db. Uses StAX parser.
+ */
+public class XmlParser {
 
     public void saveToDb(String data) {
         Customer customer = null;
@@ -43,30 +45,28 @@ public class XmlService {
                                 break;
                             }
                             case "email": {
-                                contact = new Contact();
-                                contact.setType(1);
+                                contact = new Contact(1);
                                 break;
                             }
                             case "phone": {
-                                contact = new Contact();
-                                contact.setType(2);
+                                contact = new Contact(2);
                                 break;
                             }
                             case "jabber": {
-                                contact = new Contact();
-                                contact.setType(3);
+                                contact = new Contact(3);
                                 break;
-                            } case "persons":
+                            }
+                            case "persons":
                             case "name":
                             case "surname":
                             case "age":
                             case "city":
                                 break;
                             default: {
-                                contact = new Contact();
-                                contact.setType(0);
+                                contact = new Contact(0);
                             }
-                        } break;
+                        }
+                        break;
                     case XMLStreamConstants.CHARACTERS:
                         tagContent = reader.getText().trim();
                         break;
@@ -103,11 +103,9 @@ public class XmlService {
                         break;
                 }
             }
-
         } catch (XMLStreamException | FileNotFoundException e) {
             e.printStackTrace();
         }
-
     }
 }
 
