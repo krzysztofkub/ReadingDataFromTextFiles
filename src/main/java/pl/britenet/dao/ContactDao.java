@@ -17,10 +17,11 @@ public class ContactDao {
 
     /**
      * Saves contact to db
+     *
      * @param contact
      */
     public static void save(Contact contact, int customer_id) {
-        try (Connection conn = DbUtil.getConnection(); PreparedStatement insertStm = conn.prepareStatement(CREATE_CONTACT, PreparedStatement.RETURN_GENERATED_KEYS))  {
+        try (Connection conn = DbUtil.getConnection(); PreparedStatement insertStm = conn.prepareStatement(CREATE_CONTACT, PreparedStatement.RETURN_GENERATED_KEYS)) {
             insertStm.setInt(1, customer_id);
             insertStm.setInt(2, contact.getType());
             insertStm.setString(3, contact.getContact());

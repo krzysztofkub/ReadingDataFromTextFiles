@@ -17,16 +17,5 @@ public class Main {
         File file = new File(DATA);
         CustomerService.saveFileToDb(file);
     }
-
-    /**
-     * Check if the file is XML format. If not then it's CSV.
-     * @return true if file is XML
-     */
-    private static boolean checkIfXml() {
-        String patternString = ".+\\.xml$";
-        Pattern pattern = Pattern.compile(patternString);
-        Matcher matcher = pattern.matcher(DATA);
-        return matcher.matches();
-    }
 }
 

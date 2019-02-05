@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
 /**
  * Parses CSV file into POJOs and saves to db
  */
-public class CsvParser implements Parser{
+public class CsvParser implements Parser {
 
     public List<Customer> getCustomers(File file) {
         List<Customer> customers = new ArrayList<>();
@@ -51,6 +51,7 @@ public class CsvParser implements Parser{
 
     /**
      * Jabber regex needs improving.
+     *
      * @param contact
      * @return type of contact [0 - unknown, 1 - email, 2 - phone, 3- jabber]
      */
