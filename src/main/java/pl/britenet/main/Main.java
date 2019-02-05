@@ -11,6 +11,8 @@ public class Main {
         File file = new File(args[0]);
         if (file.isFile()) {
             CustomerService.saveFileToDb(file);
+        } else {
+            System.err.println("File not found");
         }
     }
 }
