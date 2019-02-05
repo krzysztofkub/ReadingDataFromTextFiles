@@ -7,15 +7,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Main {
-
-    /**
-     * File location.
-     */
-    private static final String DATA = "src/main/resources/dane-osoby.txt";
-
     public static void main(String[] args) {
-        File file = new File(DATA);
-        CustomerService.saveFileToDb(file);
+        File file = new File(args[0]);
+        if (file.isFile()) {
+            CustomerService.saveFileToDb(file);
+        }
     }
 }
 
