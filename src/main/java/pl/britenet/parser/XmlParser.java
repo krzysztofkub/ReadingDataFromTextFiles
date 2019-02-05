@@ -1,7 +1,5 @@
 package pl.britenet.parser;
 
-import pl.britenet.dao.ContactDao;
-import pl.britenet.dao.CustomerDao;
 import pl.britenet.model.Contact;
 import pl.britenet.model.Customer;
 
@@ -9,6 +7,7 @@ import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -18,24 +17,27 @@ import java.util.List;
 /**
  * Parses XML file into POJOs and saves to db. Uses StAX parser.
  */
-public class XmlParser {
+public class XmlParser implements Parser {
 
-    public void saveToDb(String data) {
+    public List<Customer> getCustomers(File file) {
         Customer customer = null;
         List<Contact> contacts = null;
+        List<Customer> customers = null;
         Contact contact = null;
         String tagContent = null;
-        CustomerDao customerDao = new CustomerDao();
-        ContactDao contactDao = new ContactDao();
         XMLInputFactory factory = XMLInputFactory.newInstance();
         try {
-            InputStream in = new FileInputStream(data);
+            InputStream in = new FileInputStream(file);
             XMLStreamReader reader = factory.createXMLStreamReader(in);
             while (reader.hasNext()) {
                 int event = reader.next();
                 switch (event) {
                     case XMLStreamConstants.START_ELEMENT:
                         switch (reader.getLocalName()) {
+                            case "persons": {
+                                customers = new ArrayList<>();
+                                break;
+                            }
                             case "person": {
                                 customer = new Customer();
                                 break;
@@ -56,7 +58,6 @@ public class XmlParser {
                                 contact = new Contact(3);
                                 break;
                             }
-                            case "persons":
                             case "name":
                             case "surname":
                             case "age":
@@ -73,11 +74,7 @@ public class XmlParser {
                     case XMLStreamConstants.END_ELEMENT:
                         switch (reader.getLocalName()) {
                             case "person":
-                                customerDao.create(customer);
-                                for (Contact item : contacts) {
-                                    item.setCustomer(customer);
-                                    contactDao.create(item);
-                                }
+                                customers.add(customer);
                                 break;
                             case "name":
                                 customer.setName(tagContent);
@@ -88,13 +85,12 @@ public class XmlParser {
                             case "age":
                                 customer.setAge(tagContent);
                                 break;
+                            case "contacts":
+                                customer.setContacts(contacts);
+                                break;
                             case "city":
                             case "persons":
-                            case "contacts":
                                 break;
-                            case "email":
-                            case "phone":
-                            case "jabber":
                             default:
                                 contact.setContact(tagContent);
                                 contacts.add(contact);
@@ -103,9 +99,10 @@ public class XmlParser {
                         break;
                 }
             }
-        } catch (XMLStreamException | FileNotFoundException | NullPointerException e) {
+        } catch (XMLStreamException | FileNotFoundException | NullPointerException | NumberFormatException e) {
             e.printStackTrace();
         }
+        return customers;
     }
 }
 

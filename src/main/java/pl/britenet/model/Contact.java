@@ -8,10 +8,7 @@ public class Contact {
 
     private String contact;
 
-    private Customer customer;
-
-    public Contact() {
-    }
+    public Contact() {}
 
     public Contact(int type) {
         this.type = type;
@@ -39,13 +36,5 @@ public class Contact {
 
     public void setContact(String contact) {
         this.contact = contact;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
     }
 }

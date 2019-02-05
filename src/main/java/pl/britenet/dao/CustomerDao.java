@@ -1,6 +1,8 @@
 package pl.britenet.dao;
 
+import pl.britenet.model.Contact;
 import pl.britenet.model.Customer;
+import pl.britenet.utils.DbUtil;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -19,13 +21,12 @@ public class CustomerDao {
 
     /**
      * Saves customer to db
+     *
      * @param customer
      * @return customer with filled id
      */
-    public Customer create(Customer customer) {
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/britenet" + "?useSSL=false&characterEncoding=utf8", "root", "coderslab")) {
-            String generatedColumns[] = {"ID"};
-            PreparedStatement insertStm = conn.prepareStatement(CREATE_CUSTOMER, generatedColumns);
+    public static Customer save(Customer customer) {
+        try (Connection conn = DbUtil.getConnection(); PreparedStatement insertStm = conn.prepareStatement(CREATE_CUSTOMER, PreparedStatement.RETURN_GENERATED_KEYS)) {
             insertStm.setString(1, customer.getName());
             insertStm.setString(2, customer.getSurname());
             insertStm.setString(3, customer.getAge());

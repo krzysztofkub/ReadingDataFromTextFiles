@@ -1,26 +1,27 @@
 package pl.britenet.parser;
 
-import pl.britenet.dao.ContactDao;
-import pl.britenet.dao.CustomerDao;
 import pl.britenet.model.Contact;
 import pl.britenet.model.Customer;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
  * Parses CSV file into POJOs and saves to db
  */
-public class CsvParser {
+public class CsvParser implements Parser{
 
-    public void saveToDb(String data) {
-        try (BufferedReader br = new BufferedReader(new FileReader(data))) {
+    public List<Customer> getCustomers(File file) {
+        List<Customer> customers = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String line;
             while ((line = br.readLine()) != null) {
-                //Save customer from line
                 Customer customer = new Customer();
                 String[] lineArr = line.split(",");
                 customer.setName(lineArr[0]);
@@ -32,21 +33,20 @@ public class CsvParser {
                         e.printStackTrace();
                     }
                 }
-                CustomerDao customerDao = new CustomerDao();
-                customerDao.create(customer);
-                //Save contacts from line
-                ContactDao contactDao = new ContactDao();
+                List<Contact> contacts = new ArrayList<>();
                 for (int i = 4; i < lineArr.length; i++) {
                     Contact contact = new Contact();
-                    contact.setCustomer(customer);
                     contact.setType(checkType(lineArr[i]));
                     contact.setContact(lineArr[i]);
-                    contactDao.create(contact);
+                    contacts.add(contact);
                 }
+                customer.setContacts(contacts);
+                customers.add(customer);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return customers;
     }
 
     /**

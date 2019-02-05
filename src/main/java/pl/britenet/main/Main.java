@@ -1,7 +1,8 @@
 package pl.britenet.main;
 
-import pl.britenet.parser.CsvParser;
-import pl.britenet.parser.XmlParser;
+import pl.britenet.service.CustomerService;
+
+import java.io.File;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -13,13 +14,8 @@ public class Main {
     private static final String DATA = "src/main/resources/dane-osoby.txt";
 
     public static void main(String[] args) {
-        if (checkIfXml()) {
-            XmlParser xmlParser = new XmlParser();
-            xmlParser.saveToDb(DATA);
-        } else {
-            CsvParser csvParser = new CsvParser();
-            csvParser.saveToDb(DATA);
-        }
+        File file = new File(DATA);
+        CustomerService.saveFileToDb(file);
     }
 
     /**
