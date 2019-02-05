@@ -1,6 +1,7 @@
 package pl.britenet.parser;
 
 import pl.britenet.model.Contact;
+import pl.britenet.model.ContactType;
 import pl.britenet.model.Customer;
 
 import javax.xml.stream.XMLInputFactory;
@@ -47,15 +48,15 @@ public class XmlParser implements Parser {
                                 break;
                             }
                             case "email": {
-                                contact = new Contact(1);
+                                contact = new Contact(ContactType.EMAIL);
                                 break;
                             }
                             case "phone": {
-                                contact = new Contact(2);
+                                contact = new Contact(ContactType.PHONE);
                                 break;
                             }
                             case "jabber": {
-                                contact = new Contact(3);
+                                contact = new Contact(ContactType.JABBER);
                                 break;
                             }
                             case "name":
@@ -64,7 +65,7 @@ public class XmlParser implements Parser {
                             case "city":
                                 break;
                             default: {
-                                contact = new Contact(0);
+                                contact = new Contact(ContactType.UNKNOWN);
                             }
                         }
                         break;

@@ -1,6 +1,7 @@
 package pl.britenet.parser;
 
 import pl.britenet.model.Contact;
+import pl.britenet.model.ContactType;
 import pl.britenet.model.Customer;
 
 import java.io.BufferedReader;
@@ -36,7 +37,7 @@ public class CsvParser implements Parser {
                 List<Contact> contacts = new ArrayList<>();
                 for (int i = 4; i < lineArr.length; i++) {
                     Contact contact = new Contact();
-                    contact.setType(checkType(lineArr[i]));
+                    contact.setContactType(checkType(lineArr[i]));
                     contact.setContact(lineArr[i]);
                     contacts.add(contact);
                 }
@@ -55,29 +56,29 @@ public class CsvParser implements Parser {
      * @param contact
      * @return type of contact [0 - unknown, 1 - email, 2 - phone, 3- jabber]
      */
-    private int checkType(String contact) {
+    private ContactType checkType(String contact) {
         //check if email
         String emailStringPattern = "^\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,3}$";
         Pattern pattern = Pattern.compile(emailStringPattern);
         Matcher matcher = pattern.matcher(contact);
         if (matcher.matches()) {
-            return 1;
+            return ContactType.EMAIL;
         }
         //check if phone
         String phoneStringPattern = "^[1-9]\\d{2}(-|\\s)?\\d{3}(-|\\s)?\\d{3}$";
         pattern = Pattern.compile(phoneStringPattern);
         matcher = pattern.matcher(contact);
         if (matcher.matches()) {
-            return 2;
+            return ContactType.PHONE;
         }
         //check if jabber
         String jabberStringPattern = "^([A-Za-z]+)$";
         pattern = Pattern.compile(jabberStringPattern);
         matcher = pattern.matcher(contact);
         if (matcher.matches()) {
-            return 3;
+            return ContactType.JABBER;
         }
-        return 0;
+        return ContactType.UNKNOWN;
     }
 
 }

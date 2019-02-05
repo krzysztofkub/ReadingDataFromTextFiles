@@ -4,15 +4,15 @@ public class Contact {
 
     private int id;
 
-    private int type;
+    private ContactType contactType;
 
     private String contact;
 
     public Contact() {
     }
 
-    public Contact(int type) {
-        this.type = type;
+    public Contact(ContactType contactType) {
+        this.contactType = contactType;
     }
 
     public int getId() {
@@ -23,12 +23,12 @@ public class Contact {
         this.id = id;
     }
 
-    public int getType() {
-        return type;
+    public ContactType getContactType() {
+        return contactType;
     }
 
-    public void setType(int type) {
-        this.type = type;
+    public void setContactType(ContactType contactType) {
+        this.contactType = contactType;
     }
 
     public String getContact() {
